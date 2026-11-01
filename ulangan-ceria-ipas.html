@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ulangan Ceria IPAS</title>
+<style>
+:root{--bg:#e8f8f0;--ink:#173a2d;--card:#fff;--pri:#1b9e77;--g:#2fae5a;--y:#ffc93c;--r:#ef5b5b;--o:#2f6aa8;color-scheme:light dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10261d;--ink:#e8faf1;--card:#1b3a2d}}
+:root[data-theme="dark"]{--bg:#10261d;--ink:#e8faf1;--card:#1b3a2d;color-scheme:dark}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Trebuchet MS","Comic Sans MS",system-ui,sans-serif;min-height:100vh;user-select:none;-webkit-user-select:none}
+.screen{display:none;max-width:700px;margin:0 auto;padding:16px}.screen.on{display:block}
+h1{text-align:center;font-size:clamp(25px,6.5vw,38px);margin:8px 0}
+.sub{text-align:center;margin:0 0 14px;opacity:.85}
+.emo{text-align:center;font-size:72px;line-height:1}
+.card{background:var(--card);border-radius:22px;padding:16px;margin-bottom:12px;box-shadow:0 4px 0 #0002}
+.card h3{margin:0 0 10px}
+.note{font-size:14px;opacity:.85;margin:10px 0 0;text-align:center}
+input{width:100%;font:inherit;font-size:22px;padding:14px;border-radius:16px;border:3px solid var(--pri);background:var(--bg);color:var(--ink);text-align:center}
+.btn{display:block;width:100%;font:inherit;font-size:22px;font-weight:bold;padding:14px;border:0;border-radius:18px;background:var(--y);color:#2b2b2b;cursor:pointer;box-shadow:0 5px 0 #b8941a;margin-top:12px}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #b8941a}
+.btn.alt{background:var(--card);color:var(--ink);border:3px solid var(--ink);box-shadow:0 4px 0 #0003}
+.home{display:inline-block;text-decoration:none;font-weight:bold;font-size:15px;padding:8px 14px;border-radius:999px;background:var(--card);color:var(--ink);border:3px solid var(--ink)}
+.center{text-align:center;margin-bottom:8px}
+.greet{background:var(--pri);color:#fff;border-radius:22px;padding:14px;text-align:center;font-size:clamp(20px,5vw,28px);font-weight:bold;margin-bottom:12px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.chip{font:inherit;font-size:18px;font-weight:bold;padding:14px 6px;border-radius:16px;border:3px solid transparent;background:var(--bg);color:var(--ink);cursor:pointer}
+.chip small{display:block;font-size:12px;font-weight:normal;opacity:.8}
+.chip.sel{border-color:var(--y);background:#ffc93c33}
+.babs{display:grid;gap:8px}
+.bab{font:inherit;font-size:17px;text-align:left;padding:12px 14px;border-radius:14px;border:3px solid var(--pri);background:var(--bg);color:var(--ink);cursor:pointer}
+.bab.all{background:var(--pri);color:#fff}
+.top{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:10px;font-weight:bold}
+.sec{font:inherit;font-size:14px;padding:6px 12px;border-radius:14px;border:3px solid var(--ink);background:var(--card);color:var(--ink);cursor:pointer}
+.bar{height:12px;border-radius:8px;background:#0002;overflow:hidden;margin-bottom:12px}
+.bar i{display:block;height:100%;width:0;background:var(--pri);transition:width .3s}
+.qt{font-size:clamp(19px,4.8vw,26px);font-weight:bold;text-align:center;margin:8px 0 14px;line-height:1.4}
+.opts{display:grid;gap:10px}
+.opt{font:inherit;font-size:clamp(16px,4.2vw,21px);font-weight:bold;padding:16px;border-radius:18px;border:0;background:var(--o);color:#fff;cursor:pointer;box-shadow:0 5px 0 #1f4a78;touch-action:manipulation}
+.opt:active{transform:translateY(4px)}
+.opt.ok{background:var(--g);box-shadow:0 5px 0 #1d7a3c}
+.opt.no{background:var(--r);box-shadow:0 5px 0 #a83a3a;animation:sh .4s}
+.opt:disabled{cursor:default}
+@keyframes sh{25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.stars{font-size:46px;text-align:center;margin:6px 0}
+.score{text-align:center;font-size:22px;font-weight:bold}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:18px;font-weight:bold;opacity:0;transition:.25s;pointer-events:none;z-index:9;max-width:90vw;text-align:center}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+</style></head><body>
+
+<section id="s-start" class="screen on">
+  <div class="center"><a class="home" href="https://gtkkotim2026-alt.github.io/Game-Ceria-Hadvhy/">🏠 Kembali ke Menu Utama</a></div>
+  <div class="emo">🔬</div>
+  <h1>Ulangan Ceria IPAS</h1>
+  <p class="sub">Ilmu Pengetahuan Alam dan Sosial<br>Kelas 1 sampai 6</p>
+  <div class="card"><h3>Siapa namamu?</h3>
+    <input id="nm" maxlength="20" placeholder="Tulis namamu di sini..." autocomplete="off">
+    <button class="btn" id="go">Masuk ▶</button></div>
+</section>
+
+<section id="s-menu" class="screen">
+  <div class="center"><a class="home" href="https://gtkkotim2026-alt.github.io/Game-Ceria-Hadvhy/">🏠 Kembali ke Menu Utama</a></div>
+  <div class="greet" id="greet"></div>
+  <div class="card"><h3>1. Pilih kelas</h3><div class="grid" id="kelas"></div>
+    <p class="note">IPAS resmi dimulai di kelas 3 (Fase B). Kelas 1-2 berisi soal pengantar sains dan lingkungan sekitar.</p></div>
+  <div class="card" id="babcard" style="display:none"><h3>2. Pilih BAB ulangan</h3><div class="babs" id="babs"></div></div>
+  <button class="btn alt" id="chg">✏️ Ganti Nama</button>
+</section>
+
+<section id="s-quiz" class="screen">
+  <div class="top"><button class="sec" id="qb">⬅ Pilih BAB</button><span id="qh"></span><button class="sec" id="snd">🔊</button></div>
+  <div class="bar"><i id="pg"></i></div>
+  <div class="score" id="sc"></div>
+  <div class="qt" id="qt"></div>
+  <div style="text-align:center;margin-bottom:10px"><button class="sec" id="rd">🔈 Bacakan soal</button></div>
+  <div class="opts" id="op"></div>
+</section>
+
+<section id="s-res" class="screen">
+  <div class="card">
+    <div class="emo">🏆</div><h1 id="rh"></h1>
+    <div class="stars" id="rs"></div><div class="score" id="rt"></div>
+    <p class="sub" id="rm"></p>
+    <button class="btn" id="again">🔁 Ulangi</button>
+    <button class="btn alt" id="other">📚 Pilih BAB Lain</button>
+    <div class="center" style="margin-top:14px"><a class="home" href="https://gtkkotim2026-alt.github.io/Game-Ceria-Hadvhy/">🏠 Kembali ke Menu Utama</a></div>
+  </div>
+</section>
+<div id="toast"></div>
+
+<script>
+/* ============================================================
+   BANK SOAL — EDIT DI SINI untuk menyesuaikan dengan buku/modul Anda.
+   Format tiap soal: ["pertanyaan","jawaban BENAR","salah 1","salah 2"]
+   Jawaban benar SELALU ditulis di urutan pertama (diacak otomatis saat main).
+   Tiap kelas berisi daftar BAB: ["Judul BAB", [soal, soal, ...]]
+   Kelas 1-2 = pengantar (IPAS belum menjadi mapel wajib di Fase A).
+   Kelas 3-4 = Fase B, kelas 5-6 = Fase C.
+   ============================================================ */
+const FASE={1:'Pengantar',2:'Pengantar',3:'Fase B',4:'Fase B',5:'Fase C',6:'Fase C'};
+const BANK={
+1:[
+ ["Tubuh dan Panca Indra",[
+  ["Kita melihat dengan ...","mata","telinga","hidung"],
+  ["Kita mendengar dengan ...","telinga","mata","tangan"],
+  ["Kita mencium bau dengan ...","hidung","lidah","kaki"],
+  ["Lidah digunakan untuk merasakan ...","rasa makanan","bau","suara"]]],
+ ["Tumbuhan dan Hewan di Sekitarku",[
+  ["Tumbuhan membutuhkan ... agar dapat tumbuh","air dan cahaya matahari","batu dan pasir","plastik dan kertas"],
+  ["Hewan yang hidup di air adalah ...","ikan","ayam","kucing"],
+  ["Hewan yang berkembang biak dengan bertelur adalah ...","ayam","kucing","sapi"],
+  ["Bagian tumbuhan yang menyerap air dari tanah adalah ...","akar","daun","bunga"]]],
+ ["Keluarga dan Lingkunganku",[
+  ["Orang yang tinggal serumah dengan kita disebut ...","keluarga","tetangga","teman sekolah"],
+  ["Orang yang tinggal di dekat rumah kita disebut ...","tetangga","guru","dokter"],
+  ["Kita menjaga kebersihan rumah dengan ...","menyapu lantai","membuang sampah di lantai","mencoret dinding"],
+  ["Sebelum makan, kita harus ...","mencuci tangan","bermain tanah","berlari-lari"]]]],
+2:[
+ ["Cuaca dan Alam Sekitar",[
+  ["Saat langit gelap dan mendung, biasanya akan turun ...","hujan","salju","pelangi"],
+  ["Pada siang hari, cahaya terang berasal dari ...","matahari","bulan","bintang"],
+  ["Pelangi muncul setelah hujan dan ada ...","sinar matahari","gempa","banjir"],
+  ["Saat hujan deras, kita sebaiknya membawa ...","payung","kipas","kacamata renang"]]],
+ ["Kebutuhan Makhluk Hidup",[
+  ["Manusia membutuhkan ... untuk hidup","makanan, air, dan udara","batu dan pasir","mainan"],
+  ["Hewan mendapatkan makanan dari ...","tumbuhan atau hewan lain","plastik","batu"],
+  ["Tumbuhan hijau membuat makanan dengan bantuan ...","cahaya matahari","cahaya bulan","lampu mainan"],
+  ["Benda yang bukan makhluk hidup adalah ...","batu","kucing","pohon"]]],
+ ["Sekolah dan Masyarakat Sekitar",[
+  ["Orang yang mengajar di sekolah adalah ...","guru","petani","nelayan"],
+  ["Orang yang menanam padi di sawah adalah ...","petani","nelayan","pilot"],
+  ["Orang yang menangkap ikan di laut adalah ...","nelayan","petani","polisi"],
+  ["Orang yang merawat orang sakit di rumah sakit adalah ...","dokter dan perawat","guru","tukang kayu"]]]],
+3:[
+ ["Makhluk Hidup dan Siklus Hidup",[
+  ["Perubahan bentuk ulat menjadi kupu-kupu disebut ...","metamorfosis","fotosintesis","penguapan"],
+  ["Urutan siklus hidup kupu-kupu: telur, ulat, ..., kupu-kupu","kepompong","kecebong","tunas"],
+  ["Hubungan lebah dan bunga yang sama-sama untung disebut simbiosis ...","mutualisme","parasitisme","komensalisme"],
+  ["Hewan yang makan tumbuhan disebut ...","herbivora","karnivora","omnivora"]]],
+ ["Wujud Benda dan Perubahannya",[
+  ["Wujud benda ada tiga, yaitu padat, cair, dan ...","gas","logam","busa"],
+  ["Es batu mencair karena ...","dipanaskan","didinginkan","digoyang"],
+  ["Air yang dipanaskan sampai mendidih berubah menjadi ...","uap (gas)","es","batu"],
+  ["Benda yang bentuknya tetap disebut benda ...","padat","cair","gas"]]],
+ ["Lingkungan Sosial dan Keberagaman",[
+  ["Pegunungan, sungai, dan pantai termasuk ...","bentang alam","bangunan","alat transportasi"],
+  ["Kegiatan membersihkan lingkungan bersama warga disebut ...","kerja bakti","rapat","lomba"],
+  ["Banyaknya suku, bahasa, dan adat di Indonesia disebut ...","keberagaman","keseragaman","persaingan"],
+  ["Bentuk kerja sama di lingkungan rumah adalah ...","ronda bersama","bertengkar","membuang sampah ke sungai"]]]],
+4:[
+ ["Gaya dan Energi",[
+  ["Tarikan atau dorongan disebut ...","gaya","cahaya","suhu"],
+  ["Gaya yang menarik benda jatuh ke bawah adalah gaya ...","gravitasi","magnet","otot"],
+  ["Sumber energi utama bagi bumi adalah ...","matahari","bulan","bintang"],
+  ["Contoh energi terbarukan adalah ...","energi angin","minyak bumi","batu bara"]]],
+ ["Cahaya dan Bunyi",[
+  ["Benda yang dapat ditembus cahaya disebut benda ...","tembus cahaya (bening)","tidak tembus cahaya","gelap"],
+  ["Bayangan terbentuk karena cahaya terhalang benda yang ...","tidak tembus cahaya","tembus cahaya","bening"],
+  ["Bunyi dihasilkan oleh benda yang ...","bergetar","diam","dingin"],
+  ["Bunyi tidak dapat merambat di ...","ruang hampa","air","udara"]]],
+ ["Sumber Daya Alam dan Kegiatan Ekonomi",[
+  ["Sumber daya alam yang tidak dapat diperbarui adalah ...","minyak bumi","padi","ikan"],
+  ["Hutan dan air termasuk ...","sumber daya alam","barang jadi","alat tulis"],
+  ["Orang yang membuat barang disebut ...","produsen","konsumen","pembeli"],
+  ["Orang yang memakai atau membeli barang disebut ...","konsumen","produsen","pedagang"]]]],
+5:[
+ ["Ekosistem dan Rantai Makanan",[
+  ["Makhluk hidup yang membuat makanannya sendiri disebut ...","produsen","konsumen","pengurai"],
+  ["Jamur dan bakteri yang menguraikan sisa makhluk hidup disebut ...","pengurai","produsen","pemangsa"],
+  ["Rantai makanan yang benar adalah ...","rumput → belalang → katak → ular","ular → katak → belalang → rumput","katak → rumput → ular → belalang"],
+  ["Hubungan makan dan dimakan antarmakhluk hidup disebut ...","rantai makanan","siklus air","metamorfosis"]]],
+ ["Organ Tubuh Manusia",[
+  ["Salah satu organ pencernaan yang mengolah makanan adalah ...","lambung","paru-paru","jantung"],
+  ["Organ untuk bernapas adalah ...","paru-paru","lambung","ginjal"],
+  ["Jantung berfungsi memompa ...","darah","udara","makanan"],
+  ["Agar tubuh sehat, kita perlu makan makanan ...","bergizi seimbang","manis saja","berminyak saja"]]],
+ ["Keragaman Alam dan Budaya Indonesia",[
+  ["Bentang alam yang tinggi dan menjulang adalah ...","gunung","lembah","dataran rendah"],
+  ["Rumah adat, pakaian adat, dan tarian daerah termasuk ...","budaya","sumber energi","teknologi"],
+  ["Mata pencaharian penduduk daerah pantai pada umumnya adalah ...","nelayan","petani teh","penebang hutan"],
+  ["Contoh sikap menghargai keragaman adalah ...","berteman dengan semua orang","memilih teman sesuku saja","mengejek logat teman"]]]],
+6:[
+ ["Listrik dan Rangkaian",[
+  ["Benda yang dapat menghantarkan listrik disebut ...","konduktor","isolator","pembeku"],
+  ["Bahan yang tidak menghantarkan listrik adalah ...","karet","tembaga","besi"],
+  ["Rangkaian lampu yang disusun dalam satu jalur disebut rangkaian ...","seri","paralel","terbuka"],
+  ["Agar lampu menyala, rangkaian listrik harus ...","tertutup","terbuka","terputus"]]],
+ ["Bumi dan Antariksa",[
+  ["Bumi berputar pada porosnya disebut ...","rotasi","revolusi","gerhana"],
+  ["Rotasi bumi menyebabkan terjadinya ...","siang dan malam","pergantian musim","gerhana"],
+  ["Bumi mengelilingi matahari disebut ...","revolusi","rotasi","erosi"],
+  ["Pusat tata surya adalah ...","matahari","bumi","bulan"]]],
+ ["Pelestarian Lingkungan",[
+  ["Menanam pohon dapat mencegah ...","banjir dan longsor","gempa bumi","gerhana"],
+  ["Membuang sampah ke sungai dapat menyebabkan ...","banjir dan pencemaran","tanah subur","udara bersih"],
+  ["Prinsip 3R adalah reduce, reuse, dan ...","recycle","repair","remove"],
+  ["Contoh daur ulang adalah ...","mengubah sampah plastik menjadi kerajinan","membakar sampah","membuang sampah ke laut"]]]]
+};
+
+const $=id=>document.getElementById(id);
+const shuf=a=>a.map(x=>[Math.random(),x]).sort((p,q)=>p[0]-q[0]).map(p=>p[1]);
+const show=id=>document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id===id));
+let nama='Ananda',kelas=0,babSel=-2,list=[],qi=0,skor=0,lock=false,sound=true;
+
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),1800)}
+function speak(t){if(!sound||!('speechSynthesis' in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='id-ID';u.pitch=1.5;u.rate=1;speechSynthesis.speak(u)}catch(e){}}
+let ac;
+function tone(f,t0,d,type='sine',v=.18){try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.type=type;o.frequency.value=f;o.connect(g);g.connect(ac.destination);const s=ac.currentTime+t0;g.gain.setValueAtTime(v,s);g.gain.exponentialRampToValueAtTime(.001,s+d);o.start(s);o.stop(s+d)}catch(e){}}
+function sBenar(){if(!sound)return;tone(659,0,.15,'triangle');tone(880,.12,.15,'triangle');tone(1175,.24,.25,'triangle')}
+function sSalah(){if(!sound)return;tone(220,0,.2,'sawtooth',.12);tone(150,.18,.35,'sawtooth',.12)}
+$('snd').onclick=()=>{sound=!sound;$('snd').textContent=sound?'🔊':'🔇';if(!sound&&'speechSynthesis' in window)speechSynthesis.cancel()};
+const bacaan=t=>t.replace('...','titik titik').replace(/→/g,'lalu').replace(/\(([^)]*)\)/g,'$1');
+
+function masuk(){
+  nama=$('nm').value.trim()||'Ananda';
+  $('greet').textContent=`Assalamu'alaikum, ${nama}! 👋`;
+  show('s-menu');renderKelas();
+  toast(`Assalamu'alaikum, ${nama}!`);
+  speak(`Assalamu'alaikum, ${nama}!`);
+}
+$('go').onclick=masuk;
+$('nm').addEventListener('keydown',e=>{if(e.key==='Enter')masuk()});
+$('chg').onclick=()=>{show('s-start');$('nm').focus()};
+
+function renderKelas(){
+  $('kelas').innerHTML=[1,2,3,4,5,6].map(k=>`<button class="chip ${k===kelas?'sel':''}" data-k="${k}">Kelas ${k}<small>${FASE[k]}</small></button>`).join('');
+  $('kelas').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{kelas=+b.dataset.k;renderKelas();renderBab()});
+}
+function renderBab(){
+  if(!kelas){$('babcard').style.display='none';return}
+  $('babcard').style.display='block';
+  const bs=BANK[kelas];
+  $('babs').innerHTML=bs.map((b,i)=>`<button class="bab" data-i="${i}">📖 BAB ${i+1}: ${b[0]} <small>(${b[1].length} soal)</small></button>`).join('')
+   +`<button class="bab all" data-i="-1">🌟 Ulangan Semua BAB (${bs.reduce((n,b)=>n+b[1].length,0)} soal)</button>`;
+  $('babs').querySelectorAll('.bab').forEach(b=>b.onclick=()=>mulai(+b.dataset.i));
+  $('babcard').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function mulai(i){
+  babSel=i;const bs=BANK[kelas];
+  const src=i<0?bs.flatMap(b=>b[1]):bs[i][1];
+  list=shuf(src).map(s=>({q:s[0],a:s[1],o:shuf(s.slice(1))}));
+  qi=0;skor=0;
+  $('qh').textContent=`Kelas ${kelas} • ${i<0?'Semua BAB':'BAB '+(i+1)}`;
+  show('s-quiz');tampil();
+}
+function tampil(){
+  lock=false;const q=list[qi];
+  $('pg').style.width=(qi/list.length*100)+'%';
+  $('sc').textContent=`Soal ${qi+1} dari ${list.length}  •  ⭐ ${skor}`;
+  $('qt').textContent=q.q;
+  $('op').innerHTML=q.o.map(o=>`<button class="opt">${o}</button>`).join('');
+  $('op').querySelectorAll('.opt').forEach(b=>b.onclick=()=>jawab(b,q));
+  speak(bacaan(q.q));
+}
+function jawab(btn,q){
+  if(lock)return;lock=true;
+  const ok=btn.textContent===q.a;
+  $('op').querySelectorAll('.opt').forEach(b=>{b.disabled=true;if(b.textContent===q.a)b.classList.add('ok')});
+  let msg;
+  if(ok){skor++;sBenar();msg=`Benar, ${nama}! Hebat!`;toast('✅ '+msg)}
+  else{btn.classList.add('no');sSalah();msg=`Coba lagi ya, ${nama}. Jawabannya ${bacaan(q.a)}`;toast('❌ Jawaban benar: '+q.a)}
+  $('sc').textContent=`Soal ${qi+1} dari ${list.length}  •  ⭐ ${skor}`;
+  setTimeout(()=>speak(msg),ok?350:450);
+  setTimeout(()=>{qi++;qi<list.length?tampil():selesai()},ok?2200:3600);
+}
+function selesai(){
+  const n=list.length,p=skor/n;
+  const bintang=p>=.8?'⭐⭐⭐':p>=.5?'⭐⭐':'⭐';
+  const pesan=p>=.8?'Luar biasa! Kamu sangat pintar!':p>=.5?'Bagus! Belajar sedikit lagi ya!':'Jangan menyerah, ayo belajar dan coba lagi!';
+  $('rh').textContent=`Selesai, ${nama}!`;
+  $('rs').textContent=bintang;
+  $('rt').textContent=`Nilai: ${skor} dari ${n} soal`;
+  $('rm').textContent=pesan;
+  show('s-res');sBenar();
+  setTimeout(()=>speak(`Selesai, ${nama}. Kamu benar ${skor} dari ${n} soal. ${pesan}`),500);
+}
+$('rd').onclick=()=>speak(bacaan(list[qi].q));
+$('again').onclick=()=>mulai(babSel);
+$('other').onclick=()=>{show('s-menu');renderKelas();renderBab()};
+$('qb').onclick=()=>{if('speechSynthesis' in window)speechSynthesis.cancel();show('s-menu');renderKelas();renderBab()};
+</script>
+</body></html>
